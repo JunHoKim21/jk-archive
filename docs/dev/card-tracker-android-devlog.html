@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-dev/cardCheck" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">[개발 후기] 카드사 푸시·삼성페이 감지 기반 실시간 카드 실적 관리 앱 『카드실적』 제작기 | JK&#x27;s Archive</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.jk-str.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://docs.jk-str.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://docs.jk-str.com/docs/dev/card-tracker-android-devlog"><meta data-rh="true" property="og:locale" content="ko"><meta data-rh="true" name="docusaurus_locale" content="ko"><meta data-rh="true" name="docsearch:language" content="ko"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="[개발 후기] 카드사 푸시·삼성페이 감지 기반 실시간 카드 실적 관리 앱 『카드실적』 제작기 | JK&#x27;s Archive"><meta data-rh="true" name="description" content="&quot;카드사 앱들의 무거운 로그인과 로딩 피로감 없이, 결제하는 즉시 삼성페이와 푸시 알림을 가로채 이번 달 30만 원 실적 달성률을 1초 만에 확인할 수는 없을까?&quot;"><meta data-rh="true" property="og:description" content="&quot;카드사 앱들의 무거운 로그인과 로딩 피로감 없이, 결제하는 즉시 삼성페이와 푸시 알림을 가로채 이번 달 30만 원 실적 달성률을 1초 만에 확인할 수는 없을까?&quot;"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.jk-str.com/docs/dev/card-tracker-android-devlog"><link data-rh="true" rel="alternate" href="https://docs.jk-str.com/docs/dev/card-tracker-android-devlog" hreflang="ko"><link data-rh="true" rel="alternate" href="https://docs.jk-str.com/docs/dev/card-tracker-android-devlog" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"[개발 후기] 카드사 푸시·삼성페이 감지 기반 실시간 카드 실적 관리 앱 『카드실적』 제작기","item":"https://docs.jk-str.com/docs/dev/card-tracker-android-devlog"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="JK&#39;s Archive RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="JK&#39;s Archive Atom Feed"><link rel="stylesheet" href="/assets/css/styles.98b5b2e4.css">
+<script src="/assets/js/runtime~main.f0ef7d48.js" defer="defer"></script>
+<script src="/assets/js/main.a8092301.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="본문으로 건너뛰기"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">본문으로 건너뛰기</a></div><nav aria-label="메인" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="사이드바 펼치거나 접기" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="JK Archive Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="JK Archive Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">JK&#x27;s Archive</b></a><a class="navbar__item navbar__link" href="/docs/site/build-wiki">사이트구축</a><a class="navbar__item navbar__link" href="/docs/dev/myoyuwon-cat-onsen-devlog">개발지식</a><a class="navbar__item navbar__link" href="/docs/ai/overview">AI지식</a><a class="navbar__item navbar__link" href="/docs/psychology/overview">심리지식</a><a class="navbar__item navbar__link" href="/docs/etc/overview">기타지식</a><a class="navbar__item navbar__link" href="/docs/site모음/overview">기타지식</a><a class="navbar__item navbar__link" href="/blog">블로그</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/JunHoKim21/jk-archive" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="어두운 모드와 밝은 모드 전환하기 (현재 system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="맨 위로 스크롤하기" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="문서 사이드바" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/site/build-wiki"><span class="categoryLinkLabel_W154">사이트구축</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/dev/myoyuwon-cat-onsen-devlog"><span class="categoryLinkLabel_W154">개발지식</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/dev/myoyuwon-cat-onsen-devlog"><span class="linkLabel_WmDU">[개발 후기] 외부 에셋 0개로 빚어낸 3D 힐링 웹 월드, 『고양이 온천 여관 : 묘유원(猫湯院)』 제작기</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/dev/kakao-notifier-v3-devlog"><span class="linkLabel_WmDU">[개발 후기] 카카오톡 1:1 맞춤형 대량 자동 발송기 (KakaoNotifier v3.0) 제작기</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/dev/card-tracker-android-devlog"><span class="linkLabel_WmDU">[개발 후기] 카드사 푸시·삼성페이 감지 기반 실시간 카드 실적 관리 앱 『카드실적』 제작기</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/ai/overview"><span class="categoryLinkLabel_W154">AI지식</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/psychology/overview"><span class="categoryLinkLabel_W154">심리지식</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/etc/overview"><span class="categoryLinkLabel_W154">기타지식</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/site모음/overview"><span class="categoryLinkLabel_W154">사이트모음</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="탐색 경로"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="홈" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">개발지식</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">[개발 후기] 카드사 푸시·삼성페이 감지 기반 실시간 카드 실적 관리 앱 『카드실적』 제작기</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">이 페이지에서</button></div><div class="theme-doc-markdown markdown"><header><h1>[개발 후기] 카드사 푸시·삼성페이 감지 기반 실시간 카드 실적 관리 앱 『카드실적』 제작기</h1></header><blockquote>
+<p><strong>&quot;카드사 앱들의 무거운 로그인과 로딩 피로감 없이, 결제하는 즉시 삼성페이와 푸시 알림을 가로채 이번 달 30만 원 실적 달성률을 1초 만에 확인할 수는 없을까?&quot;</strong></p>
+</blockquote>
+<p>월간 카드 혜택을 챙기기 위해 매달 채워야 하는 전월 실적(30만 원, 50만 원 등). 하지만 여러 카드사 앱을 일일이 로그인해 확인하는 것은 번거롭고, 유료 SMS 알림 서비스(월 300원)나 클라우드 마이데이터 API는 비용 및 개인정보 노출 부담이 따릅니다.</p>
+<p>15년 차 백엔드 개발자로서 AI 코딩 에이전트와 페어 프로그래밍을 진행하여, <strong>외부 서버 통신 0원 &amp; 100% 오프라인 로컬 환경</strong>에서 삼성월렛(삼성페이)·카드사 푸시·문자 알림을 실시간 감지해 실적을 자동 집계하는 Android 네이티브 앱 **『카드실적』**을 개발한 과정과 핵심 트러블슈팅을 정리합니다.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-프로젝트-개요--아키텍처">1. 프로젝트 개요 &amp; 아키텍처<a href="#1-프로젝트-개요--아키텍처" class="hash-link" aria-label="1. 프로젝트 개요 &amp; 아키텍처에 대한 직접 링크" title="1. 프로젝트 개요 &amp; 아키텍처에 대한 직접 링크" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>서비스명</strong>: 카드실적 (<code>JunCardTracker</code>)</li>
+<li class=""><strong>핵심 컨셉</strong>: 무거운 카드사 앱 접속 없이 결제 즉시 상단바 알림을 감지하여 목표 실적 달성률을 추적하는 초경량 안드로이드 유틸리티</li>
+<li class=""><strong>운영 형태</strong>: 스마트폰 내부 SQLite에만 데이터를 암호화/저장하는 완전 로컬 독립 실행형 네이티브 앱</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-기술-스택-상세">🛠️ 기술 스택 상세<a href="#️-기술-스택-상세" class="hash-link" aria-label="🛠️ 기술 스택 상세에 대한 직접 링크" title="🛠️ 기술 스택 상세에 대한 직접 링크" translate="no">​</a></h3>
+<table><thead><tr><th style="text-align:left">영역</th><th style="text-align:left">기술 스택 및 버전</th><th style="text-align:left">핵심 역할</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Platform &amp; Core</strong></td><td style="text-align:left">Android Native (Kotlin 2.3.20, JVM 17, <code>targetSdk = 35</code>)</td><td style="text-align:left">네이티브 모바일 애플리케이션 코어</td></tr><tr><td style="text-align:left"><strong>UI Framework</strong></td><td style="text-align:left">Jetpack Compose (1.10.6), Compose Material 3 (1.4.0)</td><td style="text-align:left">선언형 UI, 동적 게이지 차트, 반응형 바텀시트 모달</td></tr><tr><td style="text-align:left"><strong>Architecture</strong></td><td style="text-align:left">MVVM + Repository Pattern + Reactive Stream</td><td style="text-align:left"><code>StateFlow</code>, Kotlin Coroutines 기반 단방향 데이터 흐름</td></tr><tr><td style="text-align:left"><strong>Database</strong></td><td style="text-align:left">Android 내장 SQLite (<code>SQLiteOpenHelper</code> 직접 구현)</td><td style="text-align:left">KSP/Room 컴파일 오버헤드 배제 및 빠른 영속성 보장</td></tr><tr><td style="text-align:left"><strong>System Service</strong></td><td style="text-align:left"><code>NotificationListenerService</code>, <code>BroadcastReceiver</code></td><td style="text-align:left">시스템 상단바 알림 가로채기, 앱 미실행 무음 분류 처리</td></tr><tr><td style="text-align:left"><strong>Build &amp; CI</strong></td><td style="text-align:left">Gradle 9.3.1 Wrapper</td><td style="text-align:left">자동 빌드 및 디버그 APK 자동 산출 파이프라인</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-기술적-차별점-3가지">2. 기술적 차별점 3가지<a href="#2-기술적-차별점-3가지" class="hash-link" aria-label="2. 기술적 차별점 3가지에 대한 직접 링크" title="2. 기술적 차별점 3가지에 대한 직접 링크" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-월-비용-0원--완전-로컬-데이터-격리-zero-cloud-zero-cost">① 월 비용 0원 &amp; 완전 로컬 데이터 격리 (Zero Cloud, Zero Cost)<a href="#-월-비용-0원--완전-로컬-데이터-격리-zero-cloud-zero-cost" class="hash-link" aria-label="① 월 비용 0원 &amp; 완전 로컬 데이터 격리 (Zero Cloud, Zero Cost)에 대한 직접 링크" title="① 월 비용 0원 &amp; 완전 로컬 데이터 격리 (Zero Cloud, Zero Cost)에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class="">외부 서버, 클라우드 DB, 금융 마이데이터 API를 전혀 사용하지 않습니다.</li>
+<li class="">모든 결제 내역과 실적 데이터는 스마트폰 내부 SQLite에만 격리 보관되므로, 금융 개인정보 유출 위험이 원천 차단됩니다.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-오프라인-100-동작--네트워크-무의존성">② 오프라인 100% 동작 &amp; 네트워크 무의존성<a href="#-오프라인-100-동작--네트워크-무의존성" class="hash-link" aria-label="② 오프라인 100% 동작 &amp; 네트워크 무의존성에 대한 직접 링크" title="② 오프라인 100% 동작 &amp; 네트워크 무의존성에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class="">데이터 통신이 끊긴 비행기 모드나 지하, 통신 장애 상황에서도 스마트폰 내부 로컬 알림 리스너와 SQLite가 동작하므로 100% 정상 작동합니다.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-유료-문자-비용을-아끼는-하이브리드-알림-감지-전략">③ 유료 문자 비용을 아끼는 &#x27;하이브리드 알림 감지 전략&#x27;<a href="#-유료-문자-비용을-아끼는-하이브리드-알림-감지-전략" class="hash-link" aria-label="③ 유료 문자 비용을 아끼는 &#x27;하이브리드 알림 감지 전략&#x27;에 대한 직접 링크" title="③ 유료 문자 비용을 아끼는 &#x27;하이브리드 알림 감지 전략&#x27;에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>NH농협카드</strong>: 무료 앱푸시를 감지해 해당 카드로 즉시 자동 합산.</li>
+<li class=""><strong>삼성/롯데카드 (5만 원 이상)</strong>: 카드사 무료 앱푸시/문자를 자동 인식하여 즉시 합산.</li>
+<li class=""><strong>삼성/롯데카드 (5만 원 미만 소액)</strong>: 무료 푸시가 오지 않는 카드사 특성을 고려해, <strong>삼성페이 결제 알림</strong>을 감지한 후 상단바에 <code>[삼성]</code> / <code>[롯데]</code> 원터치 선택 버튼을 띄워 앱을 켜지 않고도 1초 만에 분류 완료.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-핵심-기능-및-엔지니어링-구현-로직">3. 핵심 기능 및 엔지니어링 구현 로직<a href="#3-핵심-기능-및-엔지니어링-구현-로직" class="hash-link" aria-label="3. 핵심 기능 및 엔지니어링 구현 로직에 대한 직접 링크" title="3. 핵심 기능 및 엔지니어링 구현 로직에 대한 직접 링크" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-실시간-결제-알림-감지-및-이중-합산-방지-파이프라인">1) 실시간 결제 알림 감지 및 이중 합산 방지 파이프라인<a href="#1-실시간-결제-알림-감지-및-이중-합산-방지-파이프라인" class="hash-link" aria-label="1) 실시간 결제 알림 감지 및 이중 합산 방지 파이프라인에 대한 직접 링크" title="1) 실시간 결제 알림 감지 및 이중 합산 방지 파이프라인에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>관련 모듈</strong>: <code>CardNotificationListenerService.kt</code></li>
+<li class=""><code>NotificationListenerService</code>를 상속받아 등록된 패키지(<code>com.samsung.android.spay</code>, NH Pay, 카드사 앱, 기본 메시지 앱)의 결제 알림을 후킹합니다.</li>
+<li class=""><strong>중복 방지 큐(5초 디바운스)</strong>:<!-- -->
+<ul>
+<li class="">삼성페이 결제 시 삼성페이 자체 알림과 카드사 알림이 연달아 발생하는 경우가 있습니다.</li>
+<li class="">카드사 식별 알림이 도착했을 때, <strong>직전 5초 이내에 동일 금액의 삼성페이 미분류 알림이 대기 중이었다면 해당 대기 작업을 취소</strong>하여 중복 합산을 원천 방지합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-앱-미실행-상태바-원터치-분류-broadcastreceiver">2) 앱 미실행 상태바 원터치 분류 (<code>BroadcastReceiver</code>)<a href="#2-앱-미실행-상태바-원터치-분류-broadcastreceiver" class="hash-link" aria-label="2-앱-미실행-상태바-원터치-분류-broadcastreceiver에 대한 직접 링크" title="2-앱-미실행-상태바-원터치-분류-broadcastreceiver에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class="">삼성페이 소액 결제 감지 시 상단 상태바에 다음과 같은 액션 알림을 발행합니다:<!-- -->
+<blockquote>
+<p><strong>💳 삼성페이 1,300원 결제 감지 (롯데 프리미엄 푸드마켓)</strong><br>
+<code>[삼성카드]</code> <code>[롯데카드]</code> <code>[무시]</code></p>
+</blockquote>
+</li>
+<li class="">사용자가 앱을 켜지 않고 상단바에서 카드 버튼을 한 번 터치하면, <code>CardAssignActionReceiver</code>가 백그라운드에서 SQLite에 즉시 반영하고 알림을 닫아 사용자 액션을 최소화합니다.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-동적-실적-산정-기간-및-달성률-계산-performancecalculator">3) 동적 실적 산정 기간 및 달성률 계산 (<code>PerformanceCalculator</code>)<a href="#3-동적-실적-산정-기간-및-달성률-계산-performancecalculator" class="hash-link" aria-label="3-동적-실적-산정-기간-및-달성률-계산-performancecalculator에 대한 직접 링크" title="3-동적-실적-산정-기간-및-달성률-계산-performancecalculator에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class="">카드사마다 서로 다른 실적 인정 기준일(<code>billingDay</code>: 1~28일)을 완벽 지원합니다:<!-- -->
+<ul>
+<li class=""><strong>기준일 1일</strong>: 당월 1일 ~ 말일 자동 계산 (예: <code>11.01 ~ 11.30</code>)</li>
+<li class=""><strong>기준일 N일</strong>: 전월 N일 ~ 당월 N-1일 산정 기간 동적 반환</li>
+</ul>
+</li>
+<li class="">목표 금액 대비 인정 누적 실적, 잔여 금액(<code>remainingAmount</code>), 달성률(<code>progressPercent</code>: 0~100%), 달성 여부(<code>isAchieved</code>)를 1원 단위 오차 없이 실시간 계산합니다.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-자동-제외-키워드-필터링--수동-보정-기능">4) 자동 제외 키워드 필터링 &amp; 수동 보정 기능<a href="#4-자동-제외-키워드-필터링--수동-보정-기능" class="hash-link" aria-label="4) 자동 제외 키워드 필터링 &amp; 수동 보정 기능에 대한 직접 링크" title="4) 자동 제외 키워드 필터링 &amp; 수동 보정 기능에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class="">가맹점명에 사용자가 사전 정의한 실적 제외 키워드(<code>관리비</code>, <code>국세</code>, <code>지방세</code>, <code>상품권</code>, <code>무이자</code> 등)가 포함되어 있으면 자동으로 <code>included = false</code> 처리하고 제외 사유를 기록합니다.</li>
+<li class="">월 중간에 앱을 설치한 경우를 대비해, 카드별 <code>[보정]</code> 버튼을 통해 기존 누적 실적을 즉시 가감(<code>manualAdjustment</code>)할 수 있는 바텀시트를 제공합니다.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-비정형-영수증-텍스트-일괄-등록-bulktextparser">5) 비정형 영수증 텍스트 일괄 등록 (<code>BulkTextParser</code>)<a href="#5-비정형-영수증-텍스트-일괄-등록-bulktextparser" class="hash-link" aria-label="5-비정형-영수증-텍스트-일괄-등록-bulktextparser에 대한 직접 링크" title="5-비정형-영수증-텍스트-일괄-등록-bulktextparser에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class="">과거 승인 내역 문자나 영수증 내역 여러 줄을 복사/붙여넣기 하면 정규식 기반으로 자동 파싱합니다:<!-- -->
+<ul>
+<li class="">날짜 헤더(<code>11월 16일</code>), 가맹점명(<code>(주)비케이알</code> 등 괄호 보존), 통화 기호(<code>₩8,990</code>), 12/24시간제 시각(<code>오후 8:54</code> ➔ <code>20:54</code>) 자동 정제.</li>
+<li class=""><code>skipDuplicates</code> 옵션으로 동일 카드·시각·가맹점·금액 데이터가 이미 존재할 경우 중복 등록을 자동 방지합니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-실전-트러블슈팅-기록">4. 실전 트러블슈팅 기록<a href="#4-실전-트러블슈팅-기록" class="hash-link" aria-label="4. 실전 트러블슈팅 기록에 대한 직접 링크" title="4. 실전 트러블슈팅 기록에 대한 직접 링크" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-issue-1-실제-결제-시-삼성페이-알림-미감지-버그">🔥 Issue 1. 실제 결제 시 삼성페이 알림 미감지 버그<a href="#-issue-1-실제-결제-시-삼성페이-알림-미감지-버그" class="hash-link" aria-label="🔥 Issue 1. 실제 결제 시 삼성페이 알림 미감지 버그에 대한 직접 링크" title="🔥 Issue 1. 실제 결제 시 삼성페이 알림 미감지 버그에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>현상</strong>: 실제 매장에서 스마트폰으로 결제 시 상단바에 알림(<code>₩1,300 결제 완료</code>)이 발생했으나 앱이 결제를 인식하지 못함.</li>
+<li class=""><strong>Root Cause</strong>:<!-- -->
+<ul>
+<li class="">기존 파서 정규식이 <code>([0-9,]+)\s*원</code> 형태로 선언되어 있어, 숫자 뒤에 반드시 &#x27;원&#x27;이 붙어야만 금액으로 파싱했음.</li>
+<li class="">실제 삼성월렛(삼성페이) 푸시 알림의 Title은 <code>₩1,300 결제 완료  오후 12:20</code> 형태로, 숫자 앞단에 원화 기호(<code>₩</code>, <code>\u20A9</code>)만 있고 뒤에 &#x27;원&#x27;이 붙지 않는 구조였음.</li>
+</ul>
+</li>
+<li class=""><strong>해결</strong>:<!-- -->
+<div class="language-kotlin codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-kotlin codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 전치(₩1,300) 및 후치(1,300원) 원화 표기 모두 지원하도록 정규식 전면 개편</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">val</span><span class="token plain"> AMOUNT_REGEX </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">Regex</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string-literal multiline string" style="color:#e3116c">&quot;&quot;&quot;(?:[₩￦\u20A9\uFFE6]\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{3,})|([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{3,})\s*(?:원|[₩￦\u20A9\uFFE6]))&quot;&quot;&quot;</span><span class="token punctuation" style="color:#393A34">)</span><br></div></code></pre></div></div>
+<ul>
+<li class="">가맹점명 추출 시에도 텍스트에 단독 표기된 가맹점을 최우선 파싱하도록 <code>extractMerchant</code> 로직을 정밀화하고 단위 테스트를 추가해 해결했습니다.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-issue-2-orm-의존성-배제-및-표준-sqlite-채택">🔥 Issue 2. ORM 의존성 배제 및 표준 SQLite 채택<a href="#-issue-2-orm-의존성-배제-및-표준-sqlite-채택" class="hash-link" aria-label="🔥 Issue 2. ORM 의존성 배제 및 표준 SQLite 채택에 대한 직접 링크" title="🔥 Issue 2. ORM 의존성 배제 및 표준 SQLite 채택에 대한 직접 링크" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>현상</strong>: KSP/Room 라이브러리 연동 시 Kotlin 2.x 버전과의 컴파일러 플러그인 호환성 이슈 및 빌드 타임 증가 우려 발생.</li>
+<li class=""><strong>해결</strong>: 순수 Android 내장 <code>SQLiteOpenHelper</code>로 영속 계층을 직접 구현하여, 외부 라이브러리 충돌 가능성을 원천 차단하고 빌드 속도를 대폭 단축했습니다.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-정밀-검증-결과">5. 정밀 검증 결과<a href="#5-정밀-검증-결과" class="hash-link" aria-label="5. 정밀 검증 결과에 대한 직접 링크" title="5. 정밀 검증 결과에 대한 직접 링크" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>단위 테스트 (<code>./gradlew testDebugUnitTest</code>)</strong>:<!-- -->
+<ul>
+<li class=""><strong>총 14건 전원 통과 (Pass 100%, 실패 0건)</strong>
+<ul>
+<li class=""><code>BulkTextParserTest</code> (2건): 실제 35건 영수증 텍스트 전수 파싱 통과</li>
+<li class=""><code>NotificationParserTest</code> (5건): 삼성월렛 <code>₩1,300</code> 전치 원화, NH Pay, 승인취소 파싱 검증</li>
+<li class=""><code>PerformanceCalculatorTest</code> (7건): 월 기준일, 제외 키워드 필터링, 실적 달성률 검증</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><strong>빌드 검증</strong>: <code>assembleDebug</code> 완료 (소요 시간: 약 9~15초)</li>
+<li class=""><strong>최종 APK 산출물</strong>:<!-- -->
+<ul>
+<li class="">패키징: <code>app-debug.apk</code></li>
+<li class="">파일 크기: <strong>약 12.0 MB</strong> (가벼운 네이티브 바이너리)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-한계점-및-향후-과제">6. 한계점 및 향후 과제<a href="#6-한계점-및-향후-과제" class="hash-link" aria-label="6. 한계점 및 향후 과제에 대한 직접 링크" title="6. 한계점 및 향후 과제에 대한 직접 링크" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>할인 적용 건의 실적 제외 한계</strong>:<!-- -->
+<ul>
+<li class="">개인 개발자는 금융 마이데이터 API 발급이 불가능하므로, 카드사 알림에 별도 표기되지 않는 &#x27;청구할인 등으로 인한 실적 미인정 건&#x27;은 키워드 필터와 수동 토글 스위치에 의존합니다.</li>
+</ul>
+</li>
+<li class=""><strong>One UI 배터리 절전 정책 예외 설정 필요</strong>:<!-- -->
+<ul>
+<li class="">백그라운드에서 알림 리스너가 절전 모드로 강제 종료되지 않도록 최초 1회 <strong>&#x27;배터리 사용량 제한 없음&#x27;</strong> 및 **&#x27;알림 접근 권한&#x27;**을 사용자가 켜주어야 합니다.</li>
+</ul>
+</li>
+<li class=""><strong>삼성페이 소액 결제의 1회 원터치 개입</strong>:<!-- -->
+<ul>
+<li class="">삼성/롯데 소액 결제 시 상단바에서 카드 버튼을 한 번 눌러주는 최소한의 사용자 액션이 필요합니다.</li>
+</ul>
+</li>
+</ol>
+<p>🔗 관련 링크 &amp; 저장소</p>
+<p>본 프로젝트의 전체 소스 코드와 커밋 히스토리는 아래 GitHub 저장소에서 확인하실 수 있습니다. 도움이 되셨다면 Star ⭐️ 부탁드립니다!</p>
+<p>GitHub Repository: 👉 JunHoKim21/프로젝트명</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-tags-row"><div class="col"><b>태그:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/android">android</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/kotlin">kotlin</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/jetpack-compose">jetpack-compose</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/notification-listener">notification-listener</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/sqlite">sqlite</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/automation">automation</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/devlog">devlog</a></li></ul></div></div><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/JunHoKim21/jk-archive/tree/main/docs/02-dev/03-cardCheck.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>페이지 편집</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="문서 페이지"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/dev/kakao-notifier-v3-devlog"><div class="pagination-nav__sublabel">이전</div><div class="pagination-nav__label">[개발 후기] 카카오톡 1:1 맞춤형 대량 자동 발송기 (KakaoNotifier v3.0) 제작기</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/ai/overview"><div class="pagination-nav__sublabel">다음</div><div class="pagination-nav__label">AI 지식 아카이브</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-프로젝트-개요--아키텍처" class="table-of-contents__link toc-highlight">1. 프로젝트 개요 &amp; 아키텍처</a><ul><li><a href="#️-기술-스택-상세" class="table-of-contents__link toc-highlight">🛠️ 기술 스택 상세</a></li></ul></li><li><a href="#2-기술적-차별점-3가지" class="table-of-contents__link toc-highlight">2. 기술적 차별점 3가지</a><ul><li><a href="#-월-비용-0원--완전-로컬-데이터-격리-zero-cloud-zero-cost" class="table-of-contents__link toc-highlight">① 월 비용 0원 &amp; 완전 로컬 데이터 격리 (Zero Cloud, Zero Cost)</a></li><li><a href="#-오프라인-100-동작--네트워크-무의존성" class="table-of-contents__link toc-highlight">② 오프라인 100% 동작 &amp; 네트워크 무의존성</a></li><li><a href="#-유료-문자-비용을-아끼는-하이브리드-알림-감지-전략" class="table-of-contents__link toc-highlight">③ 유료 문자 비용을 아끼는 &#39;하이브리드 알림 감지 전략&#39;</a></li></ul></li><li><a href="#3-핵심-기능-및-엔지니어링-구현-로직" class="table-of-contents__link toc-highlight">3. 핵심 기능 및 엔지니어링 구현 로직</a><ul><li><a href="#1-실시간-결제-알림-감지-및-이중-합산-방지-파이프라인" class="table-of-contents__link toc-highlight">1) 실시간 결제 알림 감지 및 이중 합산 방지 파이프라인</a></li><li><a href="#2-앱-미실행-상태바-원터치-분류-broadcastreceiver" class="table-of-contents__link toc-highlight">2) 앱 미실행 상태바 원터치 분류 (<code>BroadcastReceiver</code>)</a></li><li><a href="#3-동적-실적-산정-기간-및-달성률-계산-performancecalculator" class="table-of-contents__link toc-highlight">3) 동적 실적 산정 기간 및 달성률 계산 (<code>PerformanceCalculator</code>)</a></li><li><a href="#4-자동-제외-키워드-필터링--수동-보정-기능" class="table-of-contents__link toc-highlight">4) 자동 제외 키워드 필터링 &amp; 수동 보정 기능</a></li><li><a href="#5-비정형-영수증-텍스트-일괄-등록-bulktextparser" class="table-of-contents__link toc-highlight">5) 비정형 영수증 텍스트 일괄 등록 (<code>BulkTextParser</code>)</a></li></ul></li><li><a href="#4-실전-트러블슈팅-기록" class="table-of-contents__link toc-highlight">4. 실전 트러블슈팅 기록</a><ul><li><a href="#-issue-1-실제-결제-시-삼성페이-알림-미감지-버그" class="table-of-contents__link toc-highlight">🔥 Issue 1. 실제 결제 시 삼성페이 알림 미감지 버그</a></li><li><a href="#-issue-2-orm-의존성-배제-및-표준-sqlite-채택" class="table-of-contents__link toc-highlight">🔥 Issue 2. ORM 의존성 배제 및 표준 SQLite 채택</a></li></ul></li><li><a href="#5-정밀-검증-결과" class="table-of-contents__link toc-highlight">5. 정밀 검증 결과</a></li><li><a href="#6-한계점-및-향후-과제" class="table-of-contents__link toc-highlight">6. 한계점 및 향후 과제</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/JunHoKim21/jk-archive" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 JK's Archive. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
