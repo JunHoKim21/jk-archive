@@ -11,7 +11,7 @@ const config: Config = {
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: false, // Windows 환경에서 Rspack CSS HMR 패닉 방지를 위해 기본 Webpack 사용
   },
 
   // Set the production url of your site here
@@ -26,6 +26,12 @@ const config: Config = {
   trailingSlash: false, // 커스텀 도메인 사용 시 라우팅 404 오류 방지
 
   onBrokenLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownImages: 'warn',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -82,10 +88,34 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          to: '/docs/site/build-wiki',
+          label: '사이트구축',
           position: 'left',
-          label: '지식 창고',
+        },
+        {
+          to: '/docs/dev/myoyuwon-cat-onsen-devlog',
+          label: '개발지식',
+          position: 'left',
+        },
+        {
+          to: '/docs/ai/overview',
+          label: 'AI지식',
+          position: 'left',
+        },
+        {
+          to: '/docs/psychology/overview',
+          label: '심리지식',
+          position: 'left',
+        },
+        {
+          to: '/docs/etc/overview',
+          label: '기타지식',
+          position: 'left',
+        },
+        {
+          to: '/docs/site모음/overview',
+          label: '기타지식',
+          position: 'left',
         },
         { to: '/blog', label: '블로그', position: 'left' },
         {
@@ -98,15 +128,6 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: '지식 창고',
-              to: '/docs/intro',
-            },
-          ],
-        },
         {
           title: 'More',
           items: [
