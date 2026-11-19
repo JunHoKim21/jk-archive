@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: "JK's Archive",
-  tagline: 'JUN 지식 아카이브',
+  tagline: '풀스택 엔지니어링 · AI 자동화 · 3D 인터랙티브 웹 지식 아카이브',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -47,26 +47,10 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/JunHoKim21/jk-archive/tree/main/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/JunHoKim21/jk-archive/tree/main/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -114,10 +98,9 @@ const config: Config = {
         },
         {
           to: '/docs/site모음/overview',
-          label: '기타지식',
+          label: '사이트모음',
           position: 'left',
         },
-        { to: '/blog', label: '블로그', position: 'left' },
         {
           href: 'https://github.com/JunHoKim21/jk-archive',
           label: 'GitHub',
@@ -129,11 +112,15 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'More',
+          title: 'Links',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: '정보전달 블로그',
+              href: 'https://etc.jk-str.com/',
+            },
+            {
+              label: '고양이 온천 여관 (묘유원)',
+              href: 'https://myoyuwon-cat-onsen.onrender.com',
             },
             {
               label: 'GitHub',
